@@ -1,7 +1,7 @@
 require 'cairo'
 
 -- set max number of streamlines.
-threads = 2000
+threads = 5000
 
 scale = 1920/360
 x0 = 0
@@ -72,7 +72,7 @@ function conky_wind()
    
    for b = 1,quiver do
       --          val,    start, lwd, red, green, blue, alpha 
-      weave( bunch[b], heads[b],   1, 255,   255,  255,     1 )
+      weave( bunch[b], heads[b],   1, 255,   255,  255,  0.2 )
    end
 
    cairo_destroy( cr )
