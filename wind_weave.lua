@@ -1,10 +1,13 @@
 require 'cairo'
 
+-- set max number of streamlines.
+threads = 2000
+
 scale = 1920/360
 x0 = 0
 y0 = math.floor( ( 1080 - 181*scale )/2 )
 
-wo = io.popen( "cat ~/wind/streamlines.dat" )
+wo = io.popen( "cat ~/wind/streamlines_10k.dat" ) -- 10k eats up half of one core!
 w = wo:read( "*all" )
 wo:close()
 
@@ -12,11 +15,11 @@ bunch = {}
 line = { x = {}, y = {} }
 local pat = "(%S+)%s+(%S+)"
 for xt, yt in string.gmatch( w, pat ) do
-   if ( xt == "0" and yt == "0" ) then --indicating new streamline block
-      table.insert( bunch, line ) -- save whole stream
+   if ( xt == "0" and yt == "0" ) then --indicating new streamline block.
+      table.insert( bunch, line ) -- save whole streamline.
       line = { x = {}, y = {} }
    else
-      table.insert( line.x, xt ) -- save x y coordinate
+      table.insert( line.x, xt ) -- save x y coordinates.
       table.insert( line.y, yt )
    end
 end
@@ -47,10 +50,8 @@ function weave( thread, head, lwd, red, green, blue, alpha )
       
    end
    
-   -- would get filled later anyway, so set to transparent & fill now
-   cairo_stroke_preserve(cr);
-   cairo_set_source_rgba (cr, 0, 0, 0, 0);
-   cairo_fill(cr);
+   cairo_stroke_preserve( cr )
+   cairo_stroke( cr )
    
 end
 
@@ -59,24 +60,22 @@ function conky_wind()
    
    if conky_window == nil then return end
    
-   local cs = cairo_xlib_surface_create(conky_window.display, conky_window.drawable, conky_window.visual, conky_window.width, conky_window.height)
+   local cs = cairo_xlib_surface_create(conky_window.display,
+                                        conky_window.drawable,
+                                        conky_window.visual,
+                                        conky_window.width,
+                                        conky_window.height)
+   cr = cairo_create( cs )
 
-   cr = cairo_create(cs)
-
-   --cairo_set_source_rgba (cr, 255, 255, 255, 1);
-   --cairo_move_to( cr, 0, 0 )
-   --cairo_show_text( cr, "streamlines: " .. #bunch )
-
-   cursec = tonumber( os.date("%S") ) --cursec = updates % slots
+   cursec = tonumber( os.date("%S") ) --cursec = updates % slots.
+   quiver = math.min( #bunch, threads )
    
-   for b = 1,#bunch do
-      
-      --weave(    val,        start, lwd,     r,   g,   b, alpha )
-      weave( bunch[b], heads[b],   1,   255, 255, 255,     1 )
-
+   for b = 1,quiver do
+      --          val,    start, lwd, red, green, blue, alpha 
+      weave( bunch[b], heads[b],   1, 255,   255,  255,     1 )
    end
 
-   cairo_destroy(cr)
-   cairo_surface_destroy(cs)
+   cairo_destroy( cr )
+   cairo_surface_destroy( cs )
    
 end
