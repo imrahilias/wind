@@ -1,2 +1,2 @@
 # wind
-current wind as streamlines as desktop background
+let current wind dance as moving streamlines on desktop background

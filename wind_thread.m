@@ -33,13 +33,14 @@ quiver (x, y, u, v);
 set(gca,"position",[0 0 1 1],"units","normalized")
 print( fh, "wind.png", "-S3600,1810" );
 
-sn = 10
+sn = 1000
 sx = floor( nx * rand( sn, 1 ) ) + 1;
 sy = floor( ny * rand( sn, 1 ) ) + 1;
-stepsize = 0.1
+stepsize = 1
 max_vertices = 100
 for cs = 1:sn
     xy = stream2( x, y, u, v, sx(cs), sy(cs), [stepsize, max_vertices] );
+    #dlmwrite( "streamlines.dat", uint16(xy{1}), " ", "-append" )
     dlmwrite( "streamlines.dat", xy{1}, " ", "-append" )
-    dlmwrite( "streamlines.dat", [0 0], "-append" )
+    dlmwrite( "streamlines.dat", [0 0], " ", "-append" )
 endfor

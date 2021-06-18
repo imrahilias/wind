@@ -26,7 +26,7 @@ v = w[2].data
 
 -- open outfile
 local charS,charE = ", ","\n"
-wo = io.open( "windr.dat", "w" )
+wo = io.open( "wind.dat", "w" )
 
 c = 0
 us = {}
@@ -47,31 +47,31 @@ for y = 1,ny do
    end
 end
 
--- open outfile
-wt = io.open( "trace.dat", "w" )
+-- -- open outfile
+-- wt = io.open( "trace.dat", "w" )
 
---local tables,lookup = { tbl },{ [tbl] = 1 }
---table.insert( tables, u )
---lookup[u] = #tables
-ntrace = 100
-ltrace = 10
-local charS,charE = "\t","\n"
-for cn = 1,ntrace do
-   local x = math.random(1,nx)
-   local y = math.random(1,ny)
-   --print( x, y, us[x][y], vs[x][y] )
-   for ct = 2,ltrace do
-      xt = x + us[x][y]
-      yt = y + vs[x][y]
-      if ( xt < 1. or xt > nx or yt < 1. or yt > ny or ( xt == x and yt == y ) ) then
-         break
-      end
-      x = math.floor( xt )
-      y = math.floor( yt )
-      wt:write(
-         tostring( x )..charS..
-         tostring( y )..charE
-      )
-   end
-   wt:write( charE..charE )
-end
+-- --local tables,lookup = { tbl },{ [tbl] = 1 }
+-- --table.insert( tables, u )
+-- --lookup[u] = #tables
+-- ntrace = 100
+-- ltrace = 10
+-- local charS,charE = "\t","\n"
+-- for cn = 1,ntrace do
+--    local x = math.random(1,nx)
+--    local y = math.random(1,ny)
+--    --print( x, y, us[x][y], vs[x][y] )
+--    for ct = 2,ltrace do
+--       xt = x + us[x][y]
+--       yt = y + vs[x][y]
+--       if ( xt < 1. or xt > nx or yt < 1. or yt > ny or ( xt == x and yt == y ) ) then
+--          break
+--       end
+--       x = math.floor( xt )
+--       y = math.floor( yt )
+--       wt:write(
+--          tostring( x )..charS..
+--          tostring( y )..charE
+--       )
+--    end
+--    wt:write( charE..charE )
+-- end
