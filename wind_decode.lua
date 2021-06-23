@@ -1,3 +1,10 @@
+--[[
+
+   lua script to downloads recent wind json from noaa (not yet),
+   import and decode it and write to csv, to be analysed by octave script wind_thread.m.
+   moritz siegel @ 210623
+]]--
+
 json = require "json"
 spline = require "spline"
 
@@ -26,7 +33,7 @@ v = w[2].data
 
 -- open outfile
 local charS,charE = ", ","\n"
-wo = io.open( "wind.dat", "w" )
+wo = io.open( "wind.csv", "w" )
 
 c = 0
 us = {}

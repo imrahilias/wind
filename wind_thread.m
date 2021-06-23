@@ -1,13 +1,13 @@
 #!/bin/octave
-## downloads recent wind data from noaa (not yet),
+## imports  recent wind data from wind.csv,
 ## calculates some 10k streamlines from random positions,
-## seperated by "0 0" lines, to be read by lua script.
+## seperated by "0 0" lines, savews as streamlines_10k.dat to be read by lua script.
 
 close all
 clear all
 clc
 
-wind = csvread( "wind.dat" );
+wind = csvread( "wind.csv" );
 
 nx = 360
 ny = 181
