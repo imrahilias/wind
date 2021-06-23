@@ -1,7 +1,8 @@
 #!/bin/octave
 ## imports  recent wind data from wind.csv,
 ## calculates some 10k streamlines from random positions,
-## seperated by "0 0" lines, savews as streamlines_10k.dat to be read by lua script.
+## seperated by "0 0" lines, savews as streamlines.dat to be read by lua script.
+## moritz siegel @ 210623
 
 close all
 clear all
@@ -45,6 +46,6 @@ stepsize = 1
 max_vertices = 100
 for cs = 1:sn
     xy = stream2( x, y, u, v, sx(cs), sy(cs), [stepsize, max_vertices] );
-    dlmwrite( "streamlines_10k.dat", xy{1}, " ", "-append" )
-    dlmwrite( "streamlines_10k.dat", [0 0], " ", "-append" )
+    dlmwrite( "streamlines.dat", xy{1}, " ", "-append" )
+    dlmwrite( "streamlines.dat", [0 0], " ", "-append" )
 endfor

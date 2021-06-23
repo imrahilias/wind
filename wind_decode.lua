@@ -1,5 +1,4 @@
 --[[
-
    lua script to downloads recent wind json from noaa (not yet),
    import and decode it and write to csv, to be analysed by octave script wind_thread.m.
    moritz siegel @ 210623

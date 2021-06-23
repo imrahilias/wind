@@ -1,3 +1,9 @@
+--[[
+   import the streamlines from streamlines.dat,
+   draw them using conkys cairo backend via wind_blow.lua.
+   moritz siegel @ 210623
+]]--
+
 require 'cairo'
 
 -- set max number of streamlines.
