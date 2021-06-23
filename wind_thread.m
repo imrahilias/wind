@@ -1,3 +1,8 @@
+#!/bin/octave
+## downloads recent wind data from noaa (not yet),
+## calculates some 10k streamlines from random positions,
+## seperated by "0 0" lines, to be read by lua script.
+
 close all
 clear all
 clc
@@ -40,7 +45,6 @@ stepsize = 1
 max_vertices = 100
 for cs = 1:sn
     xy = stream2( x, y, u, v, sx(cs), sy(cs), [stepsize, max_vertices] );
-    #dlmwrite( "streamlines.dat", uint16(xy{1}), " ", "-append" )
     dlmwrite( "streamlines_10k.dat", xy{1}, " ", "-append" )
     dlmwrite( "streamlines_10k.dat", [0 0], " ", "-append" )
 endfor
