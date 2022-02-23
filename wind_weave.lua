@@ -13,7 +13,7 @@ scale = 1920/360
 x0 = 0
 y0 = math.floor( ( 1080 - 181*scale )/2 )
 
-wo = io.popen( "cat ~/wind/streamlines_10k.dat" ) -- 10k eats up half of one core!
+wo = io.popen( "cat ~/wind/streamlines.dat" ) -- 10k eats up half of one core!
 w = wo:read( "*all" )
 wo:close()
 
